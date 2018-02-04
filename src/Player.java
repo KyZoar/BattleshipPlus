@@ -29,7 +29,9 @@ public class Player {
 	//mode de jeu actif
 	private int[] _gameMod;
 	//grille de jeu du joueur
-	private Grid _grid = new Grid(10);
+	public Grid _myGrid = new Grid(10);
+	//grille de tir du joueur
+	public Grid _targetGrid = new Grid(10);
 
 
 	/* 
@@ -120,13 +122,20 @@ public class Player {
 			int y = sc.nextInt();
 			System.out.println("\n Dans quelle direction voulez-vous le placer ? 0: HAUT, 1: DROITE, 2: BAS, 3: GAUCHE");
 			int d = sc.nextInt();
+			System.out.println("\n Dans quelle direction partent les tirs ? 0: vertical, 1: horizontal");
+			int shoot = sc.nextInt();
 			
 			Position.dir direction;
 			if(d == 0)      direction = Position.dir.HAUT;
 			else if(d == 1) direction = Position.dir.DROITE;
 			else if(d == 2) direction = Position.dir.BAS;
 			else            direction = Position.dir.GAUCHE;
-			_myShips.get(i).place(x, y, direction, _grid);			
+			_myShips.get(i).place(x, y, direction, _myGrid);	
+			_myShips.get(i).setZone(shoot);
 		}
+	}
+	
+	public void hit(int row, int col) {
+		
 	}
 }

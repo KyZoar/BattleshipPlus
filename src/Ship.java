@@ -24,9 +24,13 @@ public abstract class Ship {
 	//position is the position of the boat
 	private Position _posDeb;
 	private Position _posEnd;
+	
+	//zone de tir du bateau
+	//0: vertical, 1: horizontal
+	private int _shootZone;
 
 	
-	/* 
+	/*
 	   ------------------------
 	   -------CONSTUCTOR-------
 	   ------------------------
@@ -66,6 +70,16 @@ public abstract class Ship {
 	}
 
 
+	/* 
+	   ------------------------
+	   ---------SETTERS--------
+	   ------------------------
+	*/
+	public void setZone(int zone) {
+		assert(zone != 0 || zone != 1);
+		_shootZone = zone;
+	}
+	
 	
 	/* 
 	   ------------------------
