@@ -9,5 +9,6 @@ public class Torpedo extends Ship {
 	*/
 	public Torpedo() {
 		super(2,5,2);
+		_name = "Torpilleur";
 	}
 }

@@ -9,5 +9,6 @@ public class Cruiser extends Ship {
 	*/
 	public Cruiser() {
 		super(4,2,2);
+		_name = "Croiseur";
 	}
 }

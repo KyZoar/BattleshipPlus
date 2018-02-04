@@ -1,7 +1,9 @@
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Player {
-
+	
 	/* 
 	   ------------------------
 	   --------GAME MODS-------
@@ -12,7 +14,7 @@ public class Player {
 	//classical mod with : 1 Destroyer
 	//					   1 Submarine
 	//                     1 Torpedo
-	private static final int[] CLASSICAL_MOD = {1,1,1,1,1};
+	public static final int[] CLASSICAL_MOD = {1,1,1,1,1};
 
 
 	/* 
@@ -24,6 +26,10 @@ public class Player {
 	private LinkedList<Ship> _myShips = new LinkedList<Ship>();
 	//représente le joueur adverse
 	private Player _opponent;
+	//mode de jeu actif
+	private int[] _gameMod;
+	//grille de jeu du joueur
+	private Grid _grid = new Grid(10);
 
 
 	/* 
@@ -40,12 +46,13 @@ public class Player {
 	}
 	
 	public Player(Player opponent) {
-		this(CLASSICAL_MOD, opponent);
+		this(opponent._gameMod, opponent);
 	}
 	
 	public Player(int[] gameMod, Player opponent) {
 		createList(gameMod);
 		_opponent = opponent;
+		_gameMod = gameMod;
 	}
 
 
@@ -99,6 +106,27 @@ public class Player {
 	private void addNTorpedo(int nb) {
 		for(int i=0; i<nb; i++) {
 			_myShips.add(new Torpedo());
+		}
+	}
+	
+	//méthode de placement des bateaux
+	public void placeBoats() {
+		Scanner sc = new Scanner(System.in);
+		for(int i=0; i<_myShips.size(); i++) {
+			System.out.println("Placez maintenant un "+_myShips.get(i).getName()+" ("+_myShips.get(i).getLength()+") : \n");
+			System.out.println("Coordonnee X : ");
+			int x = sc.nextInt();
+			System.out.println("\nCoordonnee Y : ");
+			int y = sc.nextInt();
+			System.out.println("\n Dans quelle direction voulez-vous le placer ? 0: HAUT, 1: DROITE, 2: BAS, 3: GAUCHE");
+			int d = sc.nextInt();
+			
+			Position.dir direction;
+			if(d == 0)      direction = Position.dir.HAUT;
+			else if(d == 1) direction = Position.dir.DROITE;
+			else if(d == 2) direction = Position.dir.BAS;
+			else            direction = Position.dir.GAUCHE;
+			_myShips.get(i).place(x, y, direction, _grid);			
 		}
 	}
 }

@@ -9,5 +9,6 @@ public class AircraftCarrier extends Ship {
 	*/
 	public AircraftCarrier() {
 		super(5,2,2);
+		_name = "Porte-avion";
 	}
 }
